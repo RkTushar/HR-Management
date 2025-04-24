@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  .login-card {
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  .login-header {
+    background: linear-gradient(to right, #000000, #1c1c1c);
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .form-label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="card login-card">
+      <div class="login-header">🔐 Login to Your Account</div>
+      <div class="card-body bg-white p-4">
+
+        {% if form.errors %}
+          <div class="alert alert-danger">Invalid username or password</div>
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+            {{ form.username }}
+          </div>
+
+          <div class="mb-4">
+            <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+            {{ form.password }}
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">🔓 Login</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
